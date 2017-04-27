@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anonymous_pal.blutetooth_example.blueToothActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/connect_ind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="conInd" />
+
+        <TextView
+            android:id="@+id/status_msg"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/connect_ind"
+            android:text="stMsg" />
+
+        <ImageView
+            android:id="@+id/data_ind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/status_msg"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/connect_ind"
+            app:srcCompat="@android:color/holo_green_light" />
+
+        <Button
+            android:id="@+id/button_register_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/data_ind"
+            android:text="regApp" />
+
+
+        <Button
+            android:id="@+id/button_unregister_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_register_app"
+            android:layout_marginTop="10dp"
+            android:text="unregApp" />
+
+        <Button
+            android:id="@+id/button_connect_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_unregister_app"
+            android:layout_marginTop="10dp"
+            android:text="conChannel" />
+
+        <Button
+            android:id="@+id/button_disconnect_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_connect_channel"
+            android:layout_marginTop="10dp"
+            android:text="disconChannel" />
+
+
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
