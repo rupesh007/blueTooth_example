@@ -26,21 +26,12 @@
             android:layout_below="@+id/connect_ind"
             android:text="stMsg" />
 
-        <ImageView
-            android:id="@+id/data_ind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/status_msg"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/connect_ind"
-            app:srcCompat="@android:color/holo_green_light" />
-
         <Button
             android:id="@+id/button_register_app"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/status_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/data_ind"
             android:text="regApp" />
 
 

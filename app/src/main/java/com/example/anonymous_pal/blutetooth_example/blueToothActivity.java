@@ -44,7 +44,7 @@ public class blueToothActivity extends AppCompatActivity {
     private static final int HEALTH_PROFILE_SOURCE_DATA_TYPE = 0x107B;  //dataType for motion reading
     private static final int REQUEST_ENABLE_BT = 1;
     private TextView mConnectIndicator;
-    private ImageView mDataIndicator;
+   // private ImageView mDataIndicator;
     private TextView mStatusMessage;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice[] mAllBondedDevices;
@@ -72,13 +72,13 @@ public class blueToothActivity extends AppCompatActivity {
                 case BluetoothHDPService.STATUS_READ_DATA:
                     mStatusMessage.setText("read_data");
                    // mStatusMessage.setText(mRes.getString(R.string.read_data));
-                    mDataIndicator.setImageLevel(1);
+                  //  mDataIndicator.setImageLevel(1);
                     break;
                 // Finish reading data from HDP device.
                 case BluetoothHDPService.STATUS_READ_DATA_DONE:
                     mStatusMessage.setText("read_data_done");
                    // mStatusMessage.setText(mRes.getString(R.string.read_data_done));
-                    mDataIndicator.setImageLevel(0);
+                    //mDataIndicator.setImageLevel(0);
                     break;
                 // Channel creation complete.  Some devices will automatically establish
                 // connection.
@@ -117,16 +117,15 @@ public class blueToothActivity extends AppCompatActivity {
         setContentView(R.layout.activity_blue_tooth);
         mConnectIndicator = (TextView) findViewById(R.id.connect_ind);
         mStatusMessage = (TextView) findViewById(R.id.status_msg);
-        mDataIndicator = (ImageView) findViewById(R.id.data_ind);
+      //  mDataIndicator = (ImageView) findViewById(R.id.data_ind);
         mRes = getResources();
         mHealthServiceBound = false;
         // Initiates application registration through {@link BluetoothHDPService}.
         Button registerAppButton = (Button) findViewById(R.id.button_register_app);
         registerAppButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(blueToothActivity.this,"App Registered", Toast.LENGTH_LONG);
-                sendMessage(BluetoothHDPService.MSG_REG_HEALTH_APP,
-                        HEALTH_PROFILE_SOURCE_DATA_TYPE);
+                System.out.println("RegApp pressed");
+                sendMessage(BluetoothHDPService.MSG_REG_HEALTH_APP, HEALTH_PROFILE_SOURCE_DATA_TYPE);
             }
         });
         // Initiates application unregistration through {@link BluetoothHDPService}.
@@ -134,7 +133,6 @@ public class blueToothActivity extends AppCompatActivity {
         unregisterAppButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 sendMessage(BluetoothHDPService.MSG_UNREG_HEALTH_APP, 0);
-                Toast.makeText(blueToothActivity.this,"App unregistered", Toast.LENGTH_LONG);
             }
         });
         // Initiates channel creation through {@link BluetoothHDPService}.  Some devices will
@@ -174,10 +172,13 @@ public class blueToothActivity extends AppCompatActivity {
         });
         registerReceiver(mReceiver, initIntentFilter());
     }
+
+
     // Sets up communication with {@link BluetoothHDPService}.
     private ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName name, IBinder service) {
             mHealthServiceBound = true;
+            System.out.println("Connection Method Executed");
             Message msg = Message.obtain(null, BluetoothHDPService.MSG_REG_CLIENT);
             msg.replyTo = mMessenger;
             mHealthService = new Messenger(service);
@@ -193,6 +194,8 @@ public class blueToothActivity extends AppCompatActivity {
             mHealthServiceBound = false;
         }
     };
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -253,6 +256,7 @@ public class blueToothActivity extends AppCompatActivity {
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         return filter;
     }
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

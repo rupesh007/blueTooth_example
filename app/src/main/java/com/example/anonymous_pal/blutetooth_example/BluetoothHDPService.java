@@ -24,7 +24,7 @@ import java.io.IOException;
  * Created by anonymous_pal on 27.4.2017.
  */
 
-class BluetoothHDPService extends Service{
+public class BluetoothHDPService extends Service{
 
     private static final String TAG = "BluetoothHDPService";
     public static final int RESULT_OK = 0;
@@ -106,11 +106,12 @@ class BluetoothHDPService extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
+        Toast.makeText(this, "OnCreate Invoked", Toast.LENGTH_LONG);
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             // Bluetooth adapter isn't available.  The client of the service is supposed to
             // verify that it is available and activate before invoking this service.
-            stopSelf();
+           // stopSelf();
             return;
         }
         if (!mBluetoothAdapter.getProfileProxy(this, mBluetoothServiceListener,
@@ -122,11 +123,13 @@ class BluetoothHDPService extends Service{
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Toast.makeText(this, "OnStartCommand Invoked", Toast.LENGTH_LONG);
         Log.d(TAG, "BluetoothHDPService is running.");
         return START_STICKY;
     }
     @Override
     public IBinder onBind(Intent intent) {
+        Toast.makeText(this, "OnBind Invoked", Toast.LENGTH_LONG);
         return mMessenger.getBinder();
     };
     // Register health application through the Bluetooth Health API.
@@ -236,6 +239,7 @@ class BluetoothHDPService extends Service{
         }
         @Override
         public void run() {
+           System.out.println("Run Method Invoked");
             FileInputStream fis = new FileInputStream(mFd.getFileDescriptor());
             final byte data[] = new byte[8192];
             try {
